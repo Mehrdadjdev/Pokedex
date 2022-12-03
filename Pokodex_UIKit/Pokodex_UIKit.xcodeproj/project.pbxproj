@@ -17,6 +17,8 @@
 		E8F7DC39293BB9100046B2A7 /* StatisticRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F7DC38293BB9100046B2A7 /* StatisticRow.swift */; };
 		E8F7DC3B293BC8060046B2A7 /* PhysicalAppearanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F7DC3A293BC8060046B2A7 /* PhysicalAppearanceView.swift */; };
 		E8F7DC3D293BCBEF0046B2A7 /* TypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F7DC3C293BCBEF0046B2A7 /* TypeView.swift */; };
+		E8F7DC3F293BD8AA0046B2A7 /* PokedexCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F7DC3E293BD8AA0046B2A7 /* PokedexCollectionVC.swift */; };
+		E8F7DC41293BDCFB0046B2A7 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F7DC40293BDCFB0046B2A7 /* FavoriteCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		E8F7DC38293BB9100046B2A7 /* StatisticRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticRow.swift; sourceTree = "<group>"; };
 		E8F7DC3A293BC8060046B2A7 /* PhysicalAppearanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicalAppearanceView.swift; sourceTree = "<group>"; };
 		E8F7DC3C293BCBEF0046B2A7 /* TypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeView.swift; sourceTree = "<group>"; };
+		E8F7DC3E293BD8AA0046B2A7 /* PokedexCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokedexCollectionVC.swift; sourceTree = "<group>"; };
+		E8F7DC40293BDCFB0046B2A7 /* FavoriteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +99,7 @@
 		E8F7DC33293BA10B0046B2A7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				E8F7DC3E293BD8AA0046B2A7 /* PokedexCollectionVC.swift */,
 				E8F7DC2D293B9D170046B2A7 /* PokedexListVC.swift */,
 				E8F7DC36293BB0F20046B2A7 /* PokemonDetailVC.swift */,
 			);
@@ -105,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				E8F7DC2F293BA0F70046B2A7 /* PokedexRow.swift */,
+				E8F7DC40293BDCFB0046B2A7 /* FavoriteCell.swift */,
 				E8F7DC38293BB9100046B2A7 /* StatisticRow.swift */,
 				E8F7DC3A293BC8060046B2A7 /* PhysicalAppearanceView.swift */,
 				E8F7DC3C293BCBEF0046B2A7 /* TypeView.swift */,
@@ -193,8 +199,10 @@
 				E8F7DC1A293B988A0046B2A7 /* AppDelegate.swift in Sources */,
 				E8F7DC1C293B988A0046B2A7 /* SceneDelegate.swift in Sources */,
 				E8F7DC39293BB9100046B2A7 /* StatisticRow.swift in Sources */,
+				E8F7DC3F293BD8AA0046B2A7 /* PokedexCollectionVC.swift in Sources */,
 				E8F7DC37293BB0F20046B2A7 /* PokemonDetailVC.swift in Sources */,
 				E8F7DC30293BA0F70046B2A7 /* PokedexRow.swift in Sources */,
+				E8F7DC41293BDCFB0046B2A7 /* FavoriteCell.swift in Sources */,
 				E8F7DC3D293BCBEF0046B2A7 /* TypeView.swift in Sources */,
 				E8F7DC3B293BC8060046B2A7 /* PhysicalAppearanceView.swift in Sources */,
 			);
