@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Pokemon: Identifiable, Codable {
+struct Pokemon: Identifiable, Codable, Equatable {
     var id: Int
     var name: String
     var height: Int
@@ -15,5 +15,9 @@ struct Pokemon: Identifiable, Codable {
     var sprites: Sprites
     let stats: [Stat]
     let types: [TypeElement]
+    
+    static func == (lhs: Pokemon, rhs: Pokemon) -> Bool {
+        return lhs.id == rhs.id
+    }
 }
 

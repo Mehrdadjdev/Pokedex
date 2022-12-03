@@ -16,6 +16,7 @@ final class PokemonManager: ObservableObject {
     @Published private(set) var pokemonList: [Pokemon] = []
     @Published private(set) var pokemonFiltered: [Pokemon] = []
     private var pokemonIndex: PokemonIndex?
+    private var lastOrderingMode: OrderMode = .standard
     
     private func getPokemons() async throws -> [Pokemon] {
         return try await withThrowingTaskGroup(of: Pokemon.self) { group in
@@ -48,9 +49,24 @@ final class PokemonManager: ObservableObject {
             pokemonList.append(
                 contentsOf: try await getPokemons()
             )
+            sortPokemons(by: lastOrderingMode)
             
         } catch {
             print(error.localizedDescription)
+        }
+    }
+    
+    func sortPokemons(by mode: OrderMode) {
+        
+        lastOrderingMode = mode
+        
+        switch mode {
+        case .reverse:
+            pokemonList.sort(by: { $0.name > $1.name })
+        case .alphabetical:
+            pokemonList.sort(by: { $0.name < $1.name })
+        case .standard:
+            pokemonList.sort(by: { $0.id < $1.id })
         }
     }
     
@@ -70,6 +86,12 @@ extension PokemonManager {
 }
 
 extension PokemonManager {
+    
+    enum OrderMode {
+        case reverse
+        case alphabetical
+        case standard
+    }
     
     enum Error: LocalizedError {
         case invalidURL
