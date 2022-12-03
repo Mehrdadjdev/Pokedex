@@ -34,7 +34,7 @@ class PokedexCollectionVC: UIViewController, UICollectionViewDataSource, UIColle
         collectionView.register(FavoriteCell.self, forCellWithReuseIdentifier: FavoriteCell.identifier)
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.contentInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        collectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         view.addSubview(collectionView)
         
     }

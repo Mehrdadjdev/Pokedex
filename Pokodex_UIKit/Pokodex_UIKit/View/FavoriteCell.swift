@@ -20,7 +20,7 @@ class FavoriteCell: UICollectionViewCell {
         configureImageView()
         configureNameLabel()
         backgroundColor = .systemRed
-        layer.cornerRadius = 10
+        layer.cornerRadius = 30
         clipsToBounds = true
     }
     
@@ -32,14 +32,14 @@ class FavoriteCell: UICollectionViewCell {
         super.layoutSubviews()
         
         pokemonNameLabel.frame = CGRect(x: 5,
-                                        y: frame.size.height - 50,
+                                        y: frame.size.height - 40,
                                         width: frame.size.width - 10,
-                                        height: 50)
+                                        height: 40)
         
         pokemonImageView.frame = CGRect(x: 5,
-                                        y: 0,
+                                        y: 5,
                                         width: frame.size.width - 10,
-                                        height: frame.size.height - 50)
+                                        height: frame.size.height - 35)
         
     }
     
@@ -47,12 +47,15 @@ class FavoriteCell: UICollectionViewCell {
         pokemonImageView.image = UIImage(named: "bulbausaur")
         pokemonImageView.contentMode = .scaleAspectFit
         pokemonImageView.clipsToBounds = true
+        pokemonImageView.backgroundColor = .white
+        pokemonImageView.layer.cornerRadius = 30
         addSubview(pokemonImageView)
     }
     
     func configureNameLabel() {
         pokemonNameLabel.text = "bulbausaur"
         pokemonNameLabel.textAlignment = .center
+        pokemonNameLabel.textColor = .white
         addSubview(pokemonNameLabel)
     }
     
