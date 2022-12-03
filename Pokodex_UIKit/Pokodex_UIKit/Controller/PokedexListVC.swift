@@ -9,9 +9,11 @@ import UIKit
 
 class PokedexListVC: UIViewController {
     
+    //MARK: - Properties
     private var tableView = UITableView()
     private var search = UISearchController()
 
+    //MARK: - Init
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,6 +25,7 @@ class PokedexListVC: UIViewController {
         setTableViewConstraints()
     }
     
+    //MARK: - View Configuration
     func configureTableView() {
         tableView.rowHeight = 200
         
@@ -39,6 +42,7 @@ class PokedexListVC: UIViewController {
         self.navigationItem.searchController = search
     }
     
+    //MARK: - View Constraints
     func setTableViewConstraints() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
@@ -49,6 +53,7 @@ class PokedexListVC: UIViewController {
     
 }
 
+//MARK: - Table cell Configuration
 extension PokedexListVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -62,11 +67,14 @@ extension PokedexListVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        let detailView = PokemonDetailVC()
+        detailView.setData()
+        navigationController?.pushViewController(detailView, animated: true)
         
     }
 }
 
+//MARK: - Search bar function
 extension PokedexListVC: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
