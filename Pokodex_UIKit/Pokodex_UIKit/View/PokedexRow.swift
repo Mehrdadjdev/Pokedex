@@ -34,15 +34,22 @@ class PokedexRow: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setData() {
-        //mock data
-        let name = "bulbausaur"
-        let id = 1
+    func setData(pokemon: Pokemon) {        
+        pokemonNameLabel.text = pokemon.name.capitalized
+        pokemonIdLabel.text =  "#" + String(format: "%03d", pokemon.id)
+        cellView.backgroundColor = UIColor(named: pokemon.types[0].type.name)
         
-        pokemonNameLabel.text = name
-        pokemonIdLabel.text =  "#" + String(format: "%03d", id)
-        cellView.backgroundColor = .green
-        pokemonImageView.image = UIImage(named: name)
+        Task {
+            do {
+                async let data = NetworkService.shared.fetchData(for: pokemon.sprites.other.officialArtwork.front_default)
+                if let image = try await UIImage(data: data) {
+                    pokemonImageView.image = image
+                }
+            } catch {
+                pokemonImageView.image = UIImage(systemName: "questionmark.circle.fill")!
+                pokemonImageView.tintColor = .tertiaryLabel
+            }
+        }
         
     }
     

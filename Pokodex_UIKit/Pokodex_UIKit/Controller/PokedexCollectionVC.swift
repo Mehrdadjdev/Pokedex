@@ -16,7 +16,6 @@ class PokedexCollectionVC: UIViewController, UICollectionViewDataSource, UIColle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Favorites"
         configureCollectionView()
     }
     
@@ -45,7 +44,7 @@ class PokedexCollectionVC: UIViewController, UICollectionViewDataSource, UIColle
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FavoriteCell.identifier, for: indexPath) as! FavoriteCell
-        
+        cell.setData()
         return cell
     }
 }

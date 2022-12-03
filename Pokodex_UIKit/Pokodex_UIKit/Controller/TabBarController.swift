@@ -19,7 +19,7 @@ class TabBarController: UITabBarController {
     }
     
     func setupVCs() {
-        let layout = UICollectionViewFlowLayout()
+        
         viewControllers = [
             createNavController(for: PokedexListVC(), title: "Pokedex", image: UIImage(systemName: "house.fill")!),
             createNavController(for: PokedexCollectionVC(), title: "Favorites", image: UIImage(systemName: "heart.fill")!)

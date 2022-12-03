@@ -117,9 +117,9 @@
 		E8F7DC33293BA10B0046B2A7 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				E8F7DC3E293BD8AA0046B2A7 /* PokedexCollectionVC.swift */,
 				E8F7DC42293BF01C0046B2A7 /* TabBarController.swift */,
 				E8F7DC2D293B9D170046B2A7 /* PokedexListVC.swift */,
+				E8F7DC3E293BD8AA0046B2A7 /* PokedexCollectionVC.swift */,
 				E8F7DC36293BB0F20046B2A7 /* PokemonDetailVC.swift */,
 			);
 			path = Controller;

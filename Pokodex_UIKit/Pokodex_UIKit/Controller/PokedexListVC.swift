@@ -10,6 +10,7 @@ import UIKit
 class PokedexListVC: UIViewController {
     
     //MARK: - Properties
+    let pokemonManager = PokemonManager()
     private var tableView = UITableView()
     private var search = UISearchController()
 
@@ -17,12 +18,15 @@ class PokedexListVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Pokedex"
-        
         configureTableView()
         configureSearchBar()
         
         setTableViewConstraints()
+        
+        Task {
+            await pokemonManager.loadPokemons(firstCall: true)
+            tableView.reloadData()
+        }
     }
     
     //MARK: - View Configuration
@@ -57,12 +61,27 @@ class PokedexListVC: UIViewController {
 extension PokedexListVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return pokemonManager.pokemonFiltered.isEmpty ? pokemonManager.pokemonList.count : pokemonManager.pokemonFiltered.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if !search.isActive && indexPath.row == tableView.numberOfRows(inSection: 0) - 1 {
+            Task {
+                await pokemonManager.loadPokemons()
+                self.tableView.reloadData()
+            }
+        }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: PokedexRow.identifier, for: indexPath) as! PokedexRow
-        cell.setData()
+        
+        if pokemonManager.pokemonFiltered.isEmpty {
+            cell.setData(pokemon: pokemonManager.pokemonList[indexPath.row])
+        } else {
+            cell.setData(pokemon: pokemonManager.pokemonFiltered[indexPath.row])
+        }
+        cell.selectionStyle = .none
+        
         return cell
     }
     
@@ -79,7 +98,7 @@ extension PokedexListVC: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
         if searchController.isActive {
-            
+            pokemonManager.filterPokemons(by: searchController.searchBar.text ?? "")
         }
         tableView.reloadData()
     }

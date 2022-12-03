@@ -11,15 +11,17 @@ class FavoriteCell: UICollectionViewCell {
     
     static let identifier = "FavoriteCell"
     
+    //MARK: - Properties
     var pokemonImageView = UIImageView()
     var pokemonNameLabel = UILabel()
     
+    //MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         configureImageView()
         configureNameLabel()
-        backgroundColor = .systemRed
+        
         layer.cornerRadius = 30
         clipsToBounds = true
     }
@@ -28,6 +30,7 @@ class FavoriteCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Configure view
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -43,8 +46,13 @@ class FavoriteCell: UICollectionViewCell {
         
     }
     
-    func configureImageView() {
+    func setData() {
         pokemonImageView.image = UIImage(named: "bulbausaur")
+        pokemonNameLabel.text = "bulbausaur"
+        backgroundColor = .systemRed
+    }
+    
+    func configureImageView() {
         pokemonImageView.contentMode = .scaleAspectFit
         pokemonImageView.clipsToBounds = true
         pokemonImageView.backgroundColor = .white
@@ -53,9 +61,9 @@ class FavoriteCell: UICollectionViewCell {
     }
     
     func configureNameLabel() {
-        pokemonNameLabel.text = "bulbausaur"
         pokemonNameLabel.textAlignment = .center
         pokemonNameLabel.textColor = .white
+        pokemonNameLabel.font = .systemFont(ofSize: 15)
         addSubview(pokemonNameLabel)
     }
     
