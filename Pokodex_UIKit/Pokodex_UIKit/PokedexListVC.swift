@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  PokedexListVC.swift
 //  Pokodex_UIKit
 //
 //  Created by MehrDad on 03.12.2022.
@@ -7,13 +7,11 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class PokedexListVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
-
 }
 
