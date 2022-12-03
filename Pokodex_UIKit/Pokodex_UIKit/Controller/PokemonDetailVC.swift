@@ -14,6 +14,8 @@ class PokemonDetailVC: UIViewController {
     let nameLabel = UILabel()
     let cardView = UIView()
     let tableView = UITableView()
+    let weight = PhysicalAppearanceView()
+    let height = PhysicalAppearanceView()
     
     //MARK: - Init
     override func viewDidLoad() {
@@ -25,11 +27,13 @@ class PokemonDetailVC: UIViewController {
         configureNameLabel()
         configureImageView()
         configuretableView()
+        configureWeightHeightView()
         
         setCardViewConstraints()
         setImageViewConstraints()
         setNameLabelConstraints()
         setTableViewConstraints()
+        setWeightHeightConstraints()
     }
     
     //MARK: - Data Set
@@ -73,6 +77,28 @@ class PokemonDetailVC: UIViewController {
         view.addSubview(imageView)
     }
     
+    func configureWeightHeightView() {
+        //mock data
+        let weightInt = 69
+        let heightInt = 7
+        
+        let weightDouble = Double(weightInt) / 10
+        let weightString = String(format: "%.1f", weightDouble)
+        
+        let heightDouble = Double(heightInt) / 10
+        let heightString = String(format: "%.2f", heightDouble)
+        
+        weight.setData(title: "weight",
+                       property: "\(weightString) Kg")
+        
+        
+        height.setData(title: "height",
+                       property: "\(heightString) m")
+        
+        cardView.addSubview(weight)
+        cardView.addSubview(height)
+    }
+    
     //MARK: - View Constraints
     func setCardViewConstraints() {
         cardView.translatesAutoresizingMaskIntoConstraints = false
@@ -95,9 +121,21 @@ class PokemonDetailVC: UIViewController {
         nameLabel.centerYAnchor.constraint(equalTo: imageView.topAnchor, constant: -20).isActive = true
         nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
+    
+    func setWeightHeightConstraints() {
+        weight.translatesAutoresizingMaskIntoConstraints = false
+        height.translatesAutoresizingMaskIntoConstraints = false
+        
+        weight.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 50).isActive = true
+        weight.bottomAnchor.constraint(equalTo: tableView.topAnchor, constant: -20).isActive = true
+        
+        height.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -50).isActive = true
+        height.bottomAnchor.constraint(equalTo: tableView.topAnchor, constant: -20).isActive = true
+    }
 
 }
 
+//MARK: - Table View Configuration for showing statistics
 extension PokemonDetailVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 6
@@ -112,7 +150,7 @@ extension PokemonDetailVC: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    
+    //MARK: - Table View Configuration
     func configuretableView() {
         tableView.rowHeight = 50
         tableView.isScrollEnabled = false
@@ -123,9 +161,10 @@ extension PokemonDetailVC: UITableViewDelegate, UITableViewDataSource {
         view.addSubview(tableView)
     }
     
+    //MARK: - Table View Constraints
     func setTableViewConstraints() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 160).isActive = true
+        tableView.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 180).isActive = true
         tableView.leadingAnchor.constraint(equalTo: cardView.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: cardView.trailingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -50).isActive = true
