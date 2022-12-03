@@ -13,6 +13,7 @@ class PokemonDetailVC: UIViewController {
     let imageView = UIImageView()
     let nameLabel = UILabel()
     let cardView = UIView()
+    let tableView = UITableView()
     
     //MARK: - Init
     override func viewDidLoad() {
@@ -23,10 +24,12 @@ class PokemonDetailVC: UIViewController {
         configureCardView()
         configureNameLabel()
         configureImageView()
+        configuretableView()
         
         setCardViewConstraints()
         setImageViewConstraints()
         setNameLabelConstraints()
+        setTableViewConstraints()
     }
     
     //MARK: - Data Set
@@ -93,4 +96,39 @@ class PokemonDetailVC: UIViewController {
         nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
 
+}
+
+extension PokemonDetailVC: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 6
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: StatisticRow.identifier, for: indexPath) as! StatisticRow
+        cell.setData()
+        cell.selectionStyle = .none
+        
+        return cell
+    }
+    
+    
+    func configuretableView() {
+        tableView.rowHeight = 50
+        tableView.isScrollEnabled = false
+        tableView.register(StatisticRow.self, forCellReuseIdentifier: StatisticRow.identifier)
+        tableView.delegate = self
+        tableView.dataSource = self
+    
+        view.addSubview(tableView)
+    }
+    
+    func setTableViewConstraints() {
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 160).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: cardView.leadingAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: cardView.trailingAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -50).isActive = true
+    }
+    
 }
