@@ -10,6 +10,8 @@ import UIKit
 class PokemonDetailVC: UIViewController {
     
     //MARK: - Properties
+    let pokemon: Pokemon
+    
     let imageView = UIImageView()
     let nameLabel = UILabel()
     let cardView = UIView()
@@ -19,8 +21,15 @@ class PokemonDetailVC: UIViewController {
     let typeLabel = TypeView()
     
     //MARK: - Init
+    init(pokemon: Pokemon) {
+        self.pokemon = pokemon
+        super.init(nibName: nil, bundle: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setData()
         
         configureNavBarItem()
         
@@ -39,15 +48,26 @@ class PokemonDetailVC: UIViewController {
         setTypeConstraints()
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     //MARK: - Data Set
     func setData() {
-        //mock data
-        let name = "bulbausaur"
+        view.backgroundColor = UIColor(named: pokemon.types[0].type.name)
+        nameLabel.text = pokemon.name.capitalized
         
-        
-        view.backgroundColor = .green
-        nameLabel.text = name
-        imageView.image = UIImage(named: name)
+        Task {
+            do {
+                async let data = NetworkService.shared.fetchData(for: pokemon.sprites.other.officialArtwork.front_default)
+                if let image = try await UIImage(data: data) {
+                    imageView.image = image
+                }
+            } catch {
+                imageView.image = UIImage(systemName: "questionmark.circle.fill")!
+                imageView.tintColor = .tertiaryLabel
+            }
+        }
         
     }
     
@@ -80,17 +100,32 @@ class PokemonDetailVC: UIViewController {
         view.addSubview(imageView)
     }
     
+    
     func configureTypeView() {
-        //mock data
-        typeLabel.setData(type: "fire")
-        cardView.addSubview(typeLabel)
-        
+        if pokemon.types.count == 1 {
+            typeLabel.setData(type: pokemon.types[0].type.name)//type.type.name)
+            cardView.addSubview(typeLabel)
+            typeLabel.centerXAnchor.constraint(equalTo: cardView.centerXAnchor).isActive = true
+        } else {
+            typeLabel.setData(type: pokemon.types[0].type.name)
+            cardView.addSubview(typeLabel)
+            typeLabel.centerXAnchor.constraint(equalTo: cardView.centerXAnchor, constant: -70).isActive = true
+            
+            let secondTypeLabel = TypeView()
+            secondTypeLabel.setData(type: pokemon.types[1].type.name)
+            cardView.addSubview(secondTypeLabel)
+            secondTypeLabel.translatesAutoresizingMaskIntoConstraints = false
+            secondTypeLabel.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 60).isActive = true
+            secondTypeLabel.centerXAnchor.constraint(equalTo: cardView.centerXAnchor, constant: 70).isActive = true
+            
+        }
     }
+    
     
     func configureWeightHeightView() {
         //mock data
-        let weightInt = 69
-        let heightInt = 7
+        let weightInt = pokemon.weight
+        let heightInt = pokemon.height
         
         let weightDouble = Double(weightInt) / 10
         let weightString = String(format: "%.1f", weightDouble)
@@ -145,8 +180,8 @@ class PokemonDetailVC: UIViewController {
     
     func setTypeConstraints() {
         typeLabel.translatesAutoresizingMaskIntoConstraints = false
-        typeLabel.centerXAnchor.constraint(equalTo: cardView.centerXAnchor).isActive = true
         typeLabel.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 60).isActive = true
+        
     }
 
 }
@@ -154,13 +189,13 @@ class PokemonDetailVC: UIViewController {
 //MARK: - Table View Configuration for showing statistics
 extension PokemonDetailVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return pokemon.stats.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: StatisticRow.identifier, for: indexPath) as! StatisticRow
-        cell.setData()
+        cell.setData(stat: pokemon.stats[indexPath.row], type: pokemon.types[0].type.name)
         cell.selectionStyle = .none
         
         return cell

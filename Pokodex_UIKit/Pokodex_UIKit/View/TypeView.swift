@@ -27,7 +27,7 @@ class TypeView: UIView {
     
     //MARK: - Data set
     func setData(type: String) {
-        typeLabel.backgroundColor = .green
+        typeLabel.backgroundColor = UIColor(named: type)
         typeLabel.text = type
     }
     

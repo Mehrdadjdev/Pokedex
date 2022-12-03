@@ -34,16 +34,14 @@ class StatisticRow: UITableViewCell {
     }
     
     //MARK: - Data set
-    func setData() {
-        //mock data
-        let percent = 35
-        let title = "HP"
+    func setData(stat: Stat, type: String) {
+        let titles = ["hp" : "HP", "attack": "ATK", "defense": "DEF", "special-attack": "SATK", "special-defense": "SDEF", "speed": "SPD",]
         
-        percentLabel.text = String(format: "%03d", percent)
-        statLabel.text = title + ":"
-        progressView.progress = Float(percent) / 200
-        progressView.tintColor = .green
-        progressView.trackTintColor = .green.withAlphaComponent(0.2)
+        percentLabel.text = String(format: "%03d", stat.baseStat)
+        statLabel.text = (titles[stat.stat.name] ?? "N/A") + ":"
+        progressView.progress = Float(stat.baseStat) / 200
+        progressView.tintColor = UIColor(named: type)
+        progressView.trackTintColor = UIColor(named: type)?.withAlphaComponent(0.2)
     }
     
     //MARK: - View configuration
