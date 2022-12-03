@@ -9,10 +9,12 @@ import UIKit
 
 class PhysicalAppearanceView: UIView {
 
+    //MARK: - Properties
     var iconView = UIImageView()
     var titleLabel = UILabel()
     var physicalAppearance = UILabel()
     
+    //MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -29,6 +31,7 @@ class PhysicalAppearanceView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Data set
     func setData(title: String, property: String) {
         
         iconView.image = UIImage(named: title)
@@ -37,6 +40,7 @@ class PhysicalAppearanceView: UIView {
         
     }
     
+    //MARK: - View Configuration
     func configureIconView() {
         iconView.contentMode = .scaleAspectFit
         addSubview(iconView)
@@ -54,6 +58,7 @@ class PhysicalAppearanceView: UIView {
         addSubview(physicalAppearance)
     }
     
+    //MARK: - View Constraints
     func setIconConstraints() {
         iconView.translatesAutoresizingMaskIntoConstraints = false
         iconView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true

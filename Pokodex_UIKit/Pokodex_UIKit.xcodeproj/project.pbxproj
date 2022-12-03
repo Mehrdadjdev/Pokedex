@@ -16,6 +16,7 @@
 		E8F7DC37293BB0F20046B2A7 /* PokemonDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F7DC36293BB0F20046B2A7 /* PokemonDetailVC.swift */; };
 		E8F7DC39293BB9100046B2A7 /* StatisticRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F7DC38293BB9100046B2A7 /* StatisticRow.swift */; };
 		E8F7DC3B293BC8060046B2A7 /* PhysicalAppearanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F7DC3A293BC8060046B2A7 /* PhysicalAppearanceView.swift */; };
+		E8F7DC3D293BCBEF0046B2A7 /* TypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8F7DC3C293BCBEF0046B2A7 /* TypeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		E8F7DC36293BB0F20046B2A7 /* PokemonDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonDetailVC.swift; sourceTree = "<group>"; };
 		E8F7DC38293BB9100046B2A7 /* StatisticRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticRow.swift; sourceTree = "<group>"; };
 		E8F7DC3A293BC8060046B2A7 /* PhysicalAppearanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicalAppearanceView.swift; sourceTree = "<group>"; };
+		E8F7DC3C293BCBEF0046B2A7 /* TypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				E8F7DC2F293BA0F70046B2A7 /* PokedexRow.swift */,
 				E8F7DC38293BB9100046B2A7 /* StatisticRow.swift */,
 				E8F7DC3A293BC8060046B2A7 /* PhysicalAppearanceView.swift */,
+				E8F7DC3C293BCBEF0046B2A7 /* TypeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -192,6 +195,7 @@
 				E8F7DC39293BB9100046B2A7 /* StatisticRow.swift in Sources */,
 				E8F7DC37293BB0F20046B2A7 /* PokemonDetailVC.swift in Sources */,
 				E8F7DC30293BA0F70046B2A7 /* PokedexRow.swift in Sources */,
+				E8F7DC3D293BCBEF0046B2A7 /* TypeView.swift in Sources */,
 				E8F7DC3B293BC8060046B2A7 /* PhysicalAppearanceView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

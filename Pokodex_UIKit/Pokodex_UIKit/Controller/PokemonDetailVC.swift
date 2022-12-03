@@ -16,6 +16,7 @@ class PokemonDetailVC: UIViewController {
     let tableView = UITableView()
     let weight = PhysicalAppearanceView()
     let height = PhysicalAppearanceView()
+    let typeLabel = TypeView()
     
     //MARK: - Init
     override func viewDidLoad() {
@@ -28,12 +29,14 @@ class PokemonDetailVC: UIViewController {
         configureImageView()
         configuretableView()
         configureWeightHeightView()
+        configureTypeView()
         
         setCardViewConstraints()
         setImageViewConstraints()
         setNameLabelConstraints()
         setTableViewConstraints()
         setWeightHeightConstraints()
+        setTypeConstraints()
     }
     
     //MARK: - Data Set
@@ -75,6 +78,13 @@ class PokemonDetailVC: UIViewController {
     func configureImageView() {
         imageView.contentMode = .scaleAspectFit
         view.addSubview(imageView)
+    }
+    
+    func configureTypeView() {
+        //mock data
+        typeLabel.setData(type: "fire")
+        cardView.addSubview(typeLabel)
+        
     }
     
     func configureWeightHeightView() {
@@ -131,6 +141,12 @@ class PokemonDetailVC: UIViewController {
         
         height.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -50).isActive = true
         height.bottomAnchor.constraint(equalTo: tableView.topAnchor, constant: -20).isActive = true
+    }
+    
+    func setTypeConstraints() {
+        typeLabel.translatesAutoresizingMaskIntoConstraints = false
+        typeLabel.centerXAnchor.constraint(equalTo: cardView.centerXAnchor).isActive = true
+        typeLabel.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 60).isActive = true
     }
 
 }
