@@ -20,6 +20,7 @@ class PokedexListVC: UIViewController {
         
         configureTableView()
         configureSearchBar()
+        configureSortItem()
         
         setTableViewConstraints()
         
@@ -44,6 +45,33 @@ class PokedexListVC: UIViewController {
     func configureSearchBar() {
         search.searchResultsUpdater = self
         self.navigationItem.searchController = search
+    }
+    
+    func configureSortItem() {
+        self.navigationItem.rightBarButtonItem = createNavBarMenu()
+    }
+    
+    func createNavBarMenu() -> UIBarButtonItem {
+        
+        let actions: [UIAction] = [
+            .init(title: "Alphabetical", handler: { _ in
+                self.pokemonManager.sortPokemons(by: .alphabetical)
+                self.tableView.reloadData()
+            }),
+            .init(title: "Standard", handler: { _ in
+                self.pokemonManager.sortPokemons(by: .standard)
+                self.tableView.reloadData()
+            }),
+        ]
+        
+        let menu = UIMenu(identifier: .view, options: .singleSelection, children: actions)
+        
+        let symbol = UIImage(systemName: "arrow.up.arrow.down.circle.fill",
+                             withConfiguration: UIImage.SymbolConfiguration(textStyle: .title2))
+        
+        let button = UIBarButtonItem(title: nil, image: symbol, primaryAction: nil, menu: menu)
+        
+        return button
     }
     
     //MARK: - View Constraints
