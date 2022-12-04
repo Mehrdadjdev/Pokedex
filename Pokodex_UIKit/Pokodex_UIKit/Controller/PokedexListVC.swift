@@ -88,10 +88,10 @@ extension PokedexListVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if pokemonManager.pokemonFiltered.isEmpty {
-           let detailView = PokemonDetailVC(pokemon: pokemonManager.pokemonList[indexPath.row])
+            let detailView = PokemonDetailVC(pokemonManager: pokemonManager, pokemon: pokemonManager.pokemonList[indexPath.row])
             navigationController?.pushViewController(detailView, animated: true)
         } else {
-            let detailView = PokemonDetailVC(pokemon: pokemonManager.pokemonFiltered[indexPath.row])
+            let detailView = PokemonDetailVC(pokemonManager: pokemonManager, pokemon: pokemonManager.pokemonFiltered[indexPath.row])
             navigationController?.pushViewController(detailView, animated: true)
         }
         

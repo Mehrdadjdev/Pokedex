@@ -15,6 +15,7 @@ final class PokemonManager: ObservableObject {
     
     @Published private(set) var pokemonList: [Pokemon] = []
     @Published private(set) var pokemonFiltered: [Pokemon] = []
+    @Published private(set) var pokemonFavorites: [Pokemon] = []
     private var pokemonIndex: PokemonIndex?
     private var lastOrderingMode: OrderMode = .standard
     
@@ -42,9 +43,12 @@ final class PokemonManager: ObservableObject {
     
     func loadPokemons(firstCall: Bool = false) async {
         
+        let urlString = "https://pokeapi.co/api/v2/pokemon/"
+        guard let url = URL(string: urlString) else { return }
+        
         do {
             pokemonIndex = try await getData(
-                by: firstCall ? URL(string: "https://pokeapi.co/api/v2/pokemon/")! : self.pokemonIndex?.next
+                by: firstCall ? url : self.pokemonIndex?.next
             )
             pokemonList.append(
                 contentsOf: try await getPokemons()
@@ -54,6 +58,10 @@ final class PokemonManager: ObservableObject {
         } catch {
             print(error.localizedDescription)
         }
+    }
+    
+    func addPokemontoFavorites(pokemon: Pokemon) {
+        pokemonFavorites.append(pokemon)
     }
     
     func sortPokemons(by mode: OrderMode) {

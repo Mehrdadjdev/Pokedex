@@ -10,6 +10,7 @@ import UIKit
 class PokemonDetailVC: UIViewController {
     
     //MARK: - Properties
+    let pokemonManager: PokemonManager
     let pokemon: Pokemon
     
     let imageView = UIImageView()
@@ -21,10 +22,12 @@ class PokemonDetailVC: UIViewController {
     let typeLabel = TypeView()
     
     //MARK: - Init
-    init(pokemon: Pokemon) {
+    init(pokemonManager: PokemonManager, pokemon: Pokemon) {
+        self.pokemonManager = pokemonManager
         self.pokemon = pokemon
         super.init(nibName: nil, bundle: nil)
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,6 +76,7 @@ class PokemonDetailVC: UIViewController {
     
     //MARK: - Selectors
     @objc func addPokemonToFavorites() {
+        pokemonManager.addPokemontoFavorites(pokemon: pokemon)
         print("add to favorites")
     }
     

@@ -10,6 +10,7 @@ import UIKit
 class PokedexCollectionVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
     //MARK: - Properties
+    var pokemonManager = PokemonManager()
     var collectionView: UICollectionView?
     
     //MARK: - Init
@@ -39,12 +40,12 @@ class PokedexCollectionVC: UIViewController, UICollectionViewDataSource, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 8
+        return pokemonManager.pokemonFavorites.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FavoriteCell.identifier, for: indexPath) as! FavoriteCell
-        cell.setData()
+        cell.setData(pokemon: pokemonManager.pokemonFavorites[indexPath.row])
         return cell
     }
 }

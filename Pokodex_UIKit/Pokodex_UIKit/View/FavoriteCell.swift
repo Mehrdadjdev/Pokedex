@@ -46,10 +46,21 @@ class FavoriteCell: UICollectionViewCell {
         
     }
     
-    func setData() {
-        pokemonImageView.image = UIImage(named: "bulbausaur")
-        pokemonNameLabel.text = "bulbausaur"
-        backgroundColor = .systemRed
+    func setData(pokemon: Pokemon) {
+        pokemonNameLabel.text = pokemon.name
+        backgroundColor = UIColor(named: pokemon.types[0].type.name)
+        
+        Task {
+            do {
+                async let data = NetworkService.shared.fetchData(for: pokemon.sprites.other.officialArtwork.front_default)
+                if let image = try await UIImage(data: data) {
+                    pokemonImageView.image = image
+                }
+            } catch {
+                pokemonImageView.image = UIImage(systemName: "questionmark.circle.fill")!
+                pokemonImageView.tintColor = .tertiaryLabel
+            }
+        }
     }
     
     func configureImageView() {
