@@ -20,6 +20,12 @@ class PokedexCollectionVC: UIViewController, UICollectionViewDataSource, UIColle
         configureCollectionView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        collectionView?.reloadData()
+    }
+    
     //MARK: - Configure Collection View
     func configureCollectionView() {
         let widthSize = view.frame.size.width
@@ -40,12 +46,12 @@ class PokedexCollectionVC: UIViewController, UICollectionViewDataSource, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return pokemonManager.pokemonFavorites.count
+        return pokemonFavorites.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FavoriteCell.identifier, for: indexPath) as! FavoriteCell
-        cell.setData(pokemon: pokemonManager.pokemonFavorites[indexPath.row])
+        cell.setData(pokemon: pokemonFavorites[indexPath.row])
         return cell
     }
 }

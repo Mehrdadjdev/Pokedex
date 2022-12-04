@@ -11,7 +11,12 @@ class PokemonDetailVC: UIViewController {
     
     //MARK: - Properties
     let pokemonManager: PokemonManager
-    let pokemon: Pokemon
+    var pokemon: Pokemon {
+        didSet {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: pokemon.isFavorite ? "heart.fill" : "heart"), style: .plain, target: self, action: #selector(addPokemonToFavorites))
+            navigationItem.rightBarButtonItem?.tintColor = .red
+        }
+    }
     
     let imageView = UIImageView()
     let nameLabel = UILabel()
@@ -31,6 +36,10 @@ class PokemonDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if pokemonFavorites.contains(pokemon) {
+            pokemon.isFavorite = true
+        }
         
         setData()
         
@@ -77,13 +86,13 @@ class PokemonDetailVC: UIViewController {
     //MARK: - Selectors
     @objc func addPokemonToFavorites() {
         pokemonManager.addPokemontoFavorites(pokemon: pokemon)
-        print("add to favorites")
+        pokemon.isFavorite.toggle()
     }
     
     //MARK: - View Configuration
     func configureNavBarItem() {
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: self, action: #selector(addPokemonToFavorites))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: pokemon.isFavorite ? "heart.fill" : "heart"), style: .plain, target: self, action: #selector(addPokemonToFavorites))
         navigationItem.rightBarButtonItem?.tintColor = .red
     }
     

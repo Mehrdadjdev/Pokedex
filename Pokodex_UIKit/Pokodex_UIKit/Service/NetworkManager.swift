@@ -15,7 +15,6 @@ final class PokemonManager: ObservableObject {
     
     @Published private(set) var pokemonList: [Pokemon] = []
     @Published private(set) var pokemonFiltered: [Pokemon] = []
-    @Published private(set) var pokemonFavorites: [Pokemon] = []
     private var pokemonIndex: PokemonIndex?
     private var lastOrderingMode: OrderMode = .standard
     
@@ -61,7 +60,15 @@ final class PokemonManager: ObservableObject {
     }
     
     func addPokemontoFavorites(pokemon: Pokemon) {
-        pokemonFavorites.append(pokemon)
+        
+       if pokemon.isFavorite {
+            if let pokemonIndex = pokemonFavorites.firstIndex(of: pokemon) {
+                pokemonFavorites.remove(at: pokemonIndex)
+            }
+        } else {
+            pokemonFavorites.append(pokemon)
+        }
+        
     }
     
     func sortPokemons(by mode: OrderMode) {
@@ -106,3 +113,5 @@ extension PokemonManager {
         case missingPokemonIndex
     }
 }
+
+var pokemonFavorites: [Pokemon] = []
