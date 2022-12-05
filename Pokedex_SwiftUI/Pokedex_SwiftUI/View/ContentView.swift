@@ -8,14 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
+
+    @StateObject var pokedexVM = PokedexViewModel()
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        
+        TabView {
+            PokedexListView(pokedexVM: pokedexVM)
+                .tabItem {
+                    Label("Pokedex", systemImage: "house")
+                }
+            PokedexFavoritesView(pokedexVM: pokedexVM)
+                .tabItem {
+                    Label("Favorites", systemImage: "heart.fill")
+                }
         }
-        .padding()
+        .accentColor(.red)
+        
     }
 }
 

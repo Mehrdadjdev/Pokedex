@@ -9,23 +9,34 @@ import SwiftUI
 
 struct PokedexListView: View {
     
-    @ObservedObject var pokemonVM: PokedexViewModel
+    @ObservedObject var pokedexVM: PokedexViewModel
+    @State private var viewDidLoad = false
     
     var body: some View {
         NavigationView {
             ScrollView {
-                ForEach(0..<6, id: \.self) { _ in
-                    PokedexRow()
+                ForEach(pokedexVM.pokemonList, id: \.id) { pokemon in
+                    NavigationLink(destination: PokemonDetailView(pokemon: pokemon)) {
+                        PokedexRow(pokemon: pokemon)
+                    }
                 }
             }
             .navigationTitle("Pokedex")
         }
         .navigationViewStyle(.stack)
+        .onAppear {
+            if viewDidLoad == false {
+                viewDidLoad = true
+                Task {
+                    await pokedexVM.loadPokemons(firstCall: true)
+                }
+            }
+        }
     }
 }
 
 struct PokedexListView_Previews: PreviewProvider {
     static var previews: some View {
-        PokedexListView(pokemonVM: PokedexViewModel())
+        PokedexListView(pokedexVM: PokedexViewModel())
     }
 }

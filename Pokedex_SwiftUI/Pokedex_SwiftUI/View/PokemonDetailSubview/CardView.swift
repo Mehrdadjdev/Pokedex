@@ -9,10 +9,7 @@ import SwiftUI
 
 struct CardView: View {
     
-    let types: [String]
-    let weight = 69
-    let height = 69
-    let stat = Stat(baseStat: 69, effort: 0, stat: StatClass(name: "hp", url: ""))
+    let pokemon: Pokemon
     
     var body: some View {
         ZStack {
@@ -20,21 +17,21 @@ struct CardView: View {
               
             VStack(spacing: 20) {
                 HStack(spacing: 30) {
-                    ForEach(types, id: \.self) { type in
-                        TypeView(type: type)
+                    ForEach(pokemon.types, id: \.slot) { type in
+                        TypeView(type: type.type.name)
                     }
                 }
                 
                 HStack(spacing: 30) {
                     
-                    PhysicalAppereance(title: "weight", value: weight)
+                    PhysicalAppereance(title: "weight", value: pokemon.weight)
                     
-                    PhysicalAppereance(title: "height", value: height)
+                    PhysicalAppereance(title: "height", value: pokemon.height)
                 }
                 
                 VStack {
-                    ForEach(0..<6) { _ in
-                        StatisticRow(stat: stat, type: types[0])
+                    ForEach(pokemon.stats, id: \.stat.name) { stat in
+                        StatisticRow(stat: stat, type: pokemon.types[0].type.name)
                             .padding(.vertical, 5)
                         Divider()
                             .padding(.horizontal, 35)
@@ -45,8 +42,8 @@ struct CardView: View {
     }
 }
 
-struct CardView_Previews: PreviewProvider {
-    static var previews: some View {
-        CardView(types: ["grass", "fire"])
-    }
-}
+//struct CardView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CardView(types: ["grass", "fire"])
+//    }
+//}

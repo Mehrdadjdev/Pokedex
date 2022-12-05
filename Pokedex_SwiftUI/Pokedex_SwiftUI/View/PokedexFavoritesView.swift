@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PokedexFavoritesView: View {
     
+    @ObservedObject var pokedexVM: PokedexViewModel
     let columns = [
         GridItem(.flexible()),
         GridItem(.flexible()),
@@ -19,7 +20,7 @@ struct PokedexFavoritesView: View {
         NavigationView {
             ScrollView {
                 LazyVGrid(columns: columns) {
-                    ForEach(0..<8) { _ in
+                    ForEach(pokedexVM.pokemonFavorites, id: \.id) { _ in
                         PokedexCell()
                     }
                 }
@@ -31,6 +32,6 @@ struct PokedexFavoritesView: View {
 
 struct PokedexFavoritesView_Previews: PreviewProvider {
     static var previews: some View {
-        PokedexFavoritesView()
+        PokedexFavoritesView(pokedexVM: PokedexViewModel())
     }
 }
