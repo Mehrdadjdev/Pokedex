@@ -11,11 +11,12 @@ struct PokedexListView: View {
     
     @ObservedObject var pokedexVM: PokedexViewModel
     @State private var viewDidLoad = false
+    @State private var searchText = ""
     
     var body: some View {
         NavigationView {
             ScrollView {
-                ForEach(pokedexVM.pokemonList, id: \.id) { pokemon in
+                ForEach(searchResult, id: \.id) { pokemon in
                     NavigationLink(destination: PokemonDetailView(pokemon: pokemon, pokemonVM: pokedexVM)) {
                         PokedexRow(pokemon: pokemon)
                     }
@@ -31,6 +32,15 @@ struct PokedexListView: View {
                     await pokedexVM.loadPokemons(firstCall: true)
                 }
             }
+        }
+        .searchable(text: $searchText)
+    }
+    
+    var searchResult: [Pokemon] {
+        if searchText.isEmpty {
+            return pokedexVM.pokemonList
+        } else {
+            return pokedexVM.pokemonList.filter { $0.name.contains(searchText.lowercased()) }
         }
     }
 }
