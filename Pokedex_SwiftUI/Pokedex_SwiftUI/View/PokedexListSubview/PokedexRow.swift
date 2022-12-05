@@ -20,6 +20,7 @@ struct PokedexRow: View {
             } placeholder: {
                 Image(systemName: "questionmark.circle.fill")
                     .resizable()
+                    .scaledToFit()
                     .foregroundColor(.secondary)
             }
             .frame(width: 100, height: 100)

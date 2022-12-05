@@ -16,7 +16,7 @@ struct PokedexListView: View {
         NavigationView {
             ScrollView {
                 ForEach(pokedexVM.pokemonList, id: \.id) { pokemon in
-                    NavigationLink(destination: PokemonDetailView(pokemon: pokemon)) {
+                    NavigationLink(destination: PokemonDetailView(pokemon: pokemon, pokemonVM: pokedexVM)) {
                         PokedexRow(pokemon: pokemon)
                     }
                 }

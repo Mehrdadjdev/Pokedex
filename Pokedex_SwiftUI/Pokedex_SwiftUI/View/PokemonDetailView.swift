@@ -10,6 +10,8 @@ import SwiftUI
 struct PokemonDetailView: View {
     
     let pokemon: Pokemon
+    @ObservedObject var pokemonVM: PokedexViewModel
+    @State private var isFavorite: Bool = false
     
     var body: some View {
         ZStack {
@@ -35,6 +37,7 @@ struct PokemonDetailView: View {
                 } placeholder: {
                     Image(systemName: "questionmark.circle.fill")
                         .resizable()
+                        .scaledToFit()
                         .foregroundColor(.secondary)
                 }
                 .foregroundColor(.secondary)
@@ -46,6 +49,28 @@ struct PokemonDetailView: View {
             
         }
         .ignoresSafeArea()
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    if isFavorite {
+                        guard let pokemonIndex = pokemonVM.pokemonFavorites.firstIndex(of: pokemon) else { return }
+                        pokemonVM.pokemonFavorites.remove(at: pokemonIndex)
+                    } else {
+                        pokemonVM.pokemonFavorites.append(pokemon)
+                    }
+                    isFavorite.toggle()
+                    
+                } label: {
+                    Image(systemName: isFavorite ? "heart.fill" : "heart")
+                        .foregroundColor(.red)
+                }
+            }
+        }
+        .onAppear {
+            if pokemonVM.pokemonFavorites.contains(pokemon) {
+                isFavorite = true
+            }
+        }
     }
 }
 

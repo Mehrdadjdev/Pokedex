@@ -20,8 +20,8 @@ struct PokedexFavoritesView: View {
         NavigationView {
             ScrollView {
                 LazyVGrid(columns: columns) {
-                    ForEach(pokedexVM.pokemonFavorites, id: \.id) { _ in
-                        PokedexCell()
+                    ForEach(pokedexVM.pokemonFavorites, id: \.id) { pokemon in
+                        PokedexCell(pokemon: pokemon)
                     }
                 }
             }
