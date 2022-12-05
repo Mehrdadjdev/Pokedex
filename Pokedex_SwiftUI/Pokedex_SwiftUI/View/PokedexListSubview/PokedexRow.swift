@@ -11,6 +11,7 @@ struct PokedexRow: View {
     
     let name = "bulbausaur"
     let id = 1
+    let type = "grass"
     
     var body: some View {
         VStack {
@@ -34,7 +35,7 @@ struct PokedexRow: View {
         }
         .frame(height: 180)
         .frame(maxWidth: .infinity)
-        .background(Color(.green))
+        .background(Color(type))
         .cornerRadius(20)
         .padding(.horizontal)
     }
