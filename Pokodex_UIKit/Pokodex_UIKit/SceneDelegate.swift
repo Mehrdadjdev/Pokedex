@@ -21,6 +21,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        let navController = UINavigationController(rootViewController: PokedexCollectionVC())
 //        navController.navigationBar.prefersLargeTitles = true
         let rootView = TabBarController()
+        rootView.selectedIndex = 1
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.001) {
+            rootView.selectedIndex = 0
+        }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         window?.rootViewController = rootView

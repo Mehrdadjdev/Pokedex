@@ -12,18 +12,35 @@ class PokedexCollectionVC: UIViewController, UICollectionViewDataSource, UIColle
     //MARK: - Properties
     var pokemonManager = PokemonManager()
     var collectionView: UICollectionView?
+    var favorites: [Pokemon] = []
     
     //MARK: - Init
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureCollectionView()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handlefavorites), name: .saveToFavorites, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(removefavorites), name: .removeFromFavorites, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         collectionView?.reloadData()
+    }
+    
+    //MARK: - Selectors
+    @objc func handlefavorites(notification: Notification) {
+        let detailVC = notification.object as! PokemonDetailVC
+        favorites.append(detailVC.pokemon)
+    }
+    
+    @objc func removefavorites(notification: Notification) {
+        let detailVC = notification.object as! PokemonDetailVC
+        if let index = favorites.firstIndex(of: detailVC.pokemon) {
+            favorites.remove(at: index)
+        }
     }
     
     //MARK: - Configure Collection View
@@ -46,12 +63,12 @@ class PokedexCollectionVC: UIViewController, UICollectionViewDataSource, UIColle
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return pokemonFavorites.count
+        return favorites.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FavoriteCell.identifier, for: indexPath) as! FavoriteCell
-        cell.setData(pokemon: pokemonFavorites[indexPath.row])
+        cell.setData(pokemon: favorites[indexPath.row])
         return cell
     }
 }

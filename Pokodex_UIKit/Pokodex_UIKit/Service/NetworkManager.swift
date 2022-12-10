@@ -15,6 +15,7 @@ final class PokemonManager: ObservableObject {
     
     @Published private(set) var pokemonList: [Pokemon] = []
     @Published private(set) var pokemonFiltered: [Pokemon] = []
+    @Published private(set) var pokemonFavorites: [Pokemon] = []
     private var pokemonIndex: PokemonIndex?
     private var lastOrderingMode: OrderMode = .standard
     
@@ -113,5 +114,3 @@ extension PokemonManager {
         case missingPokemonIndex
     }
 }
-
-var pokemonFavorites: [Pokemon] = []

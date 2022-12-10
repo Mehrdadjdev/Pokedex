@@ -37,10 +37,6 @@ class PokemonDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if pokemonFavorites.contains(pokemon) {
-            pokemon.isFavorite = true
-        }
-        
         setData()
         
         configureNavBarItem()
@@ -81,11 +77,19 @@ class PokemonDetailVC: UIViewController {
             }
         }
         
+        if pokemonManager.pokemonFavorites.contains(pokemon) {
+            pokemon.isFavorite = true
+        }
     }
     
     //MARK: - Selectors
     @objc func addPokemonToFavorites() {
         pokemonManager.addPokemontoFavorites(pokemon: pokemon)
+        if pokemon.isFavorite {
+            NotificationCenter.default.post(name: .removeFromFavorites , object: self)
+        } else {
+            NotificationCenter.default.post(name: .saveToFavorites , object: self)
+        }
         pokemon.isFavorite.toggle()
     }
     
